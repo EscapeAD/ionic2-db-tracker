@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { tokenNotExpired } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
+
+import { NavController } from 'ionic-angular';
 
 /*
   Generated class for the Auth provider.
@@ -34,5 +37,8 @@ user: any;
   }
   loadToken(){
     this.authToken = localStorage.getItem('id_token');
+  }
+  loggedIn(){
+  return tokenNotExpired();
   }
 }

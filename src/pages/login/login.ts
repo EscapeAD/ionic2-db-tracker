@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { App, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
 import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 
 /*
@@ -19,7 +20,7 @@ password: string;
 email: string;
 user: Object;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: Auth, private alert: AlertController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: Auth, private alert: AlertController, public appCtrl: App) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -33,7 +34,7 @@ user: Object;
 
   this.authService.logUser(this.user).subscribe((data) => {
       this.authService.storeUserData(data.auth_token, data.user);
-      this.navCtrl.push(HomePage);
+      this.appCtrl.getRootNav().setRoot(TabsPage);
   }, err => {
     if(err){
       this.alert.create({
@@ -44,8 +45,6 @@ user: Object;
         .present();
     }
   })
-
   }
-
 
 }
