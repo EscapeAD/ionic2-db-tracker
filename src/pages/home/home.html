@@ -9,4 +9,14 @@
   <p>
     Choose your event and Go
   </p>
+    <ul>
+      <li *ngFor="let event of eventNow">
+        <span>{{event.name}}</span>
+          <ul>
+            <li *ngFor="let booth of boothNow">
+                <span *ngIf="event.id == booth.event_id">{{booth.name}}</span>
+            </li>
+          </ul>
+      </li>
+    </ul>
 </ion-content>

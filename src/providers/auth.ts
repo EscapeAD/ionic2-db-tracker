@@ -37,8 +37,17 @@ user: any;
   }
   loadToken(){
     this.authToken = localStorage.getItem('id_token');
+    this.user      = localStorage.getItem('user');
   }
   loggedIn(){
   return tokenNotExpired();
+  }
+  getInfo(){
+    let headers = new Headers();
+    this.loadToken()
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get('http://localhost:3000/mobile', {headers: headers})
+                    .map(res => res.json())
   }
 }
