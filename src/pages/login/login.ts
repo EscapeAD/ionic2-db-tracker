@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Auth } from '../../providers/auth';
+import { HomePage } from '../home/home';
+
 
 /*
   Generated class for the Login page.
@@ -16,7 +19,7 @@ password: string;
 email: string;
 infoForLogin: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authService: Auth) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -30,6 +33,16 @@ infoForLogin: any;
       email: this.email,
       password: this.password
     }
+    
+  this.authService.logUser(this.infoForLogin).subscribe(returnData => {
+    if(returnData.success){
+      this.authService.storeUserData(returnData.token, returnData.user);
+      this.navCtrl.push(HomePage)
+    } else {
+
+    }
+  })
+
   }
 
 
