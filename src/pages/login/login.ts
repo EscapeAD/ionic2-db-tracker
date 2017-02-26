@@ -37,7 +37,7 @@ user: Object;
   }, err => {
     if(err){
       this.alert.create({
-          title: 'Please Check Login Information',
+          title: 'Error Loggin In:',
           subTitle: JSON.parse(err._body).errors,
           buttons: ['OK']
         })
