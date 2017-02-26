@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 
 import { Auth } from '../providers/auth';
 
+
 @NgModule({
   declarations: [
     MyApp,
