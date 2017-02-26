@@ -31,19 +31,17 @@ user: Object;
       password: this.password
     }
 
-  this.authService.logUser(this.user).subscribe(data => {
-    console.log(data);
-    if(data.user && data.auth_token){
+  this.authService.logUser(this.user).subscribe((data) => {
       this.authService.storeUserData(data.auth_token, data.user);
       this.navCtrl.push(HomePage);
-    } else {
+  }, err => {
+    if(err){
       this.alert.create({
-          title: 'Unauthorized Login',
-          subTitle: 'returnData.msg',
+          title: 'Please Check Login Information',
+          subTitle: JSON.parse(err._body).errors,
           buttons: ['OK']
         })
         .present();
-        console.log('WTF');
     }
   })
 
