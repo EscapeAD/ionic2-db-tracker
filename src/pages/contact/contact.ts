@@ -3,6 +3,7 @@ import { NavController, Platform, AlertController } from 'ionic-angular';
 import { BarcodeScanner } from 'ionic-native';
 
 
+
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'

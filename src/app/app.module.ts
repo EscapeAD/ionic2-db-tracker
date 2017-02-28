@@ -6,6 +6,8 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 
 import { Auth } from '../providers/auth';
 
@@ -20,7 +22,8 @@ import { Auth } from '../providers/auth';
     LoginPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
