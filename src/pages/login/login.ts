@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
-import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 
 

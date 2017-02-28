@@ -3,8 +3,6 @@ import { Http, Headers } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
-import { NavController } from 'ionic-angular';
-
 /*
   Generated class for the Auth provider.
 

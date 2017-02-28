@@ -26,7 +26,7 @@ cordova:any;
                   title: "Attention!",
                   subTitle: error,
                   buttons: ["Close"]
-              }).present();
+              }).present()
           });
       });
 
