@@ -11,17 +11,27 @@ import { NavController } from 'ionic-angular';
 export class AboutPage implements OnInit {
   events:Object;
   tickets:Object;
-  doughnutChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  doughnutChartData:number[] = [350, 450, 100];
-  doughnutChartType:string = 'doughnut';
+  chartLabels:string[] = []
+  chartData:number[] = [];
+  chartType:string = 'doughnut';
 
   constructor(public navCtrl: NavController, private authService: Auth) {
 
   }
  ngOnInit(){
-   this.authService.getInfo().subscribe(data =>{
+   this.authService.getStats().subscribe(data =>{
      console.log(data)
-     this.events  = data.events
+     // Need to split this in it own service someday.
+     let graph    = data.events
+     let tickets  = data.tickets
+     console.log(graph)
+     console.log(tickets)
+
+     graph.forEach((x)=>{
+       this.chartLabels.push(x.name)
+       this.chartData.push(tickets.filter((y)=> y.event_id == x.id).length)
+     })
+
      this.tickets = data.tickets
    })
   }

@@ -53,7 +53,7 @@ user: any;
     this.loadToken()
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/mobile/stats', {headers: headers})
+    return this.http.get('http://localhost:3000/mobile/stats', {headers: headers})
                     .map(res => res.json())
   }
   ticketIn(user){

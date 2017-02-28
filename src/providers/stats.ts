@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
+import { Auth } from './auth';
 import 'rxjs/add/operator/map';
 
 /*
@@ -11,8 +12,31 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Stats {
 
-  constructor(public http: Http) {
+  constructor(public http: Http, private authService: Auth, private headers: Headers) {
     console.log('Hello Stats Provider');
   }
-
+  getInfo(){
+    let headers = new Headers();
+    this.authService.loadToken()
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.get('http://localhost:3000/mobile/home', {headers: headers})
+                    .map(res => res.json())
+  }
+  getStats(){
+    let headers = new Headers();
+    this.authService.loadToken()
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/mobile/stats', {headers: headers})
+                    .map(res => res.json())
+  }
+  ticketIn(user){
+    let headers = new Headers();
+    this.authService.loadToken()
+    headers.append('Authorization', this.authService.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/mobile/ticket', user, {headers: headers})
+                    .map(res => res.json())
+  }
 }
