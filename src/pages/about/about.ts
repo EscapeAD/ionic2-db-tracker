@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Auth } from '../../providers/auth';
 import { NavController } from 'ionic-angular';
 
@@ -12,7 +12,6 @@ export class AboutPage implements OnInit, AfterViewInit {
   chartLabels:string[]  = [];
   chartData:number[]    = [];
   chartType:string      = 'doughnut';
-  @ViewChild("myCanvas") myCanvas;
 
   constructor(public navCtrl: NavController, private authService: Auth) {
 
@@ -26,8 +25,7 @@ export class AboutPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    let canvas = this.myCanvas.nativeElement;
-    canvas.reset();
+
   }
   // events
   public chartClicked(e:any):void {
