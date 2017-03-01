@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Auth } from '../../providers/auth';
 import { NavController } from 'ionic-angular';
 
@@ -6,7 +6,7 @@ import { NavController } from 'ionic-angular';
   selector: 'page-about',
   templateUrl: 'about.html'
 })
-export class AboutPage implements OnInit, AfterViewInit {
+export class AboutPage implements OnInit {
   events:Object;
   tickets:Object;
   chartLabels:string[]  = [];
@@ -19,12 +19,18 @@ export class AboutPage implements OnInit, AfterViewInit {
  ngOnInit(){
    this.authService.getStats().subscribe(data =>{
      // Need to split this in it own service someday.
-     this.chartLabels = data.events;
-     this.chartData   = data.tickets
+     data.tickets.forEach((x)=>{
+       this.chartData.push(x)
+     })
+     this.chartLabels = data.events
    })
   }
 
   ngAfterViewInit() {
+
+  }
+
+  ngOnChanges(){
 
   }
   // events
