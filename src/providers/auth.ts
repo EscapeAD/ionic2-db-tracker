@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Auth {
+website:string = 'http://localhost:3000'
 authToken: any;
 user: any;
   constructor(public http: Http) {
@@ -19,7 +20,7 @@ user: any;
   logUser(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/auth_user', user, {headers: headers})
+    return this.http.post(`${this.website}/auth_user`, user, {headers: headers})
                     .map(res => res.json())
   }
   storeUserData(token, user){
@@ -45,7 +46,7 @@ user: any;
     this.loadToken()
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/mobile/home', {headers: headers})
+    return this.http.get(`${this.website}/mobile/home`, {headers: headers})
                     .map(res => res.json())
   }
   getStats(){
@@ -53,15 +54,28 @@ user: any;
     this.loadToken()
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/mobile/stats', {headers: headers})
+    return this.http.get(`${this.website}/mobile/stats`, {headers: headers})
                     .map(res => res.json())
+                    .map(data =>{
+                      let graph = data.events
+                      let tickets = data.tickets
+                      let final   = {
+                        events: [],
+                        tickets: []
+                      }
+                      graph.forEach((x)=>{
+                        final['events'].push(x.name)
+                        final['tickets'].push(tickets.filter((y)=> y.event_id == x.id).length)
+                      })
+                      return final
+                    })
   }
   ticketIn(user){
     let headers = new Headers();
     this.loadToken()
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/mobile/ticket', user, {headers: headers})
+    return this.http.post(`${this.website}/mobile/ticket`, user, {headers: headers})
                     .map(res => res.json())
   }
 }
