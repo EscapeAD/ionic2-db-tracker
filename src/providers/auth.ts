@@ -11,7 +11,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Auth {
-website:string = 'http://localhost:3000'
+website:string = 'https://stark-cliffs-78389.herokuapp.com'
+// website:string = 'http://localhost:3000'
 authToken: any;
 user: any;
   constructor(public http: Http) {
