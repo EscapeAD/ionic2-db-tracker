@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { Auth } from '../../providers/auth';
 import { App } from 'ionic-angular';
 
@@ -17,9 +18,16 @@ export class TabsPage {
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
 
-  constructor(private auth: Auth, public appCtrl: App) {
+  constructor(private auth: Auth, public appCtrl: App, private nav: NavController) {
+    console.log(this.auth.loggedIn())
     if(!this.auth.loggedIn()){
       this.appCtrl.getRootNav().setRoot(LoginPage);
+      this.nav.popToRoot();
     }
+  }
+  logout(){
+    this.auth.logout()
+    this.appCtrl.getRootNav().setRoot(LoginPage);
+    this.nav.popToRoot();
   }
 }
