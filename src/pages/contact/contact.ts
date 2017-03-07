@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, Platform, AlertController } from 'ionic-angular';
 import { BarcodeScanner } from 'ionic-native';
 import { Auth } from '../../providers/auth';
@@ -9,19 +9,27 @@ import { Auth } from '../../providers/auth';
   selector: 'page-contact',
   templateUrl: 'contact.html'
 })
-export class ContactPage {
+export class ContactPage implements OnInit {
 event: number;
 booth: number;
-cordova:any;
+cordova: any;
+selectedBooth: any;
   constructor(public nav: NavController, private platform: Platform, public alert: AlertController, private authService: Auth) {
 
   }
+  ngOnInit(){
+    this.authService.getInfo().subscribe(data=>{
+      console.log(data)
+      this.booth = data.booth
+    })
+  }
 
   scan() {
+    console.log(this.selectedBooth)
       this.platform.ready().then(() => {
         BarcodeScanner.scan().then((barcodeData)=>{
           console.log(barcodeData.text)
-              this.authService.ticketIn(barcodeData.text).subscribe(result =>{
+              this.authService.ticketIn(barcodeData.text, this.selectedBooth).subscribe(result =>{
                 this.alert.create({
                         title: "Scan Results",
                         subTitle: `Enjoy ${result}`,

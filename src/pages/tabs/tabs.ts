@@ -22,12 +22,11 @@ export class TabsPage {
     console.log(this.auth.loggedIn())
     if(!this.auth.loggedIn()){
       this.appCtrl.getRootNav().setRoot(LoginPage);
-      this.nav.popToRoot();
+      this.appCtrl.getRootNav().push(LoginPage);
     }
   }
   logout(){
-    this.auth.logout()
     this.appCtrl.getRootNav().setRoot(LoginPage);
-    this.nav.popToRoot();
+    this.auth.logout()
   }
 }

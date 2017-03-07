@@ -11,8 +11,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Auth {
-website:string = 'https://stark-cliffs-78389.herokuapp.com'
-// website:string = 'http://localhost:3000'
+// website:string = 'https://stark-cliffs-78389.herokuapp.com'
+website:string = 'http://localhost:3000'
 authToken: any;
 user: any;
   constructor(public http: Http) {
@@ -76,12 +76,16 @@ user: any;
                       return final
                     })
   }
-  ticketIn(user){
+  ticketIn(user, booth){
     let headers = new Headers();
+    let info    = {
+      user_hex: user,
+      booth_id: booth
+    }
     this.loadToken()
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`${this.website}/mobile/ticket`, user, {headers: headers})
+    return this.http.post(`${this.website}/mobile/ticket`, info, {headers: headers})
                     .map(res => res.json())
   }
 }

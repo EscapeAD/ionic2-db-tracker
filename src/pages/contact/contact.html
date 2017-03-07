@@ -9,6 +9,12 @@
 <ion-content>
   <ion-list>
     <ion-item>
+      <ion-label>Booth Selected:</ion-label>
+      <ion-select [(ngModel)]="selectedBooth">
+        <ion-option *ngFor="let boo of booth">{{boo.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       Scanner will go here
       <button (click)="scan()"type="submit" ion-button color="primary" block>Scan</button>
     </ion-item>
