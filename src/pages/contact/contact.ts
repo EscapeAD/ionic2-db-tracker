@@ -32,7 +32,7 @@ selectedBooth: any;
               this.authService.ticketIn(barcodeData.text, this.selectedBooth).subscribe(result =>{
                 this.alert.create({
                         title: "Scan Results",
-                        subTitle: `Enjoy ${result}`,
+                        subTitle: `Enjoy ${result.result}`,
                         buttons: ["Close"]
                     }).present();
               }, err => {
